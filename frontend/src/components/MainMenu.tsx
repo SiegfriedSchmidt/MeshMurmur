@@ -1,16 +1,17 @@
 import React, {useRef, useState} from 'react';
 import {
   Drawer,
-  Button,
   Portal,
   CloseButton,
   SegmentGroup
 } from "@chakra-ui/react";
+import {IconButton} from '@mui/material'
 import PeerSettings from "@/components/PeerSettings/PeerSettings.tsx";
 import PeerGraph from "./PeerGraph.tsx"
 import NicknameAssigner from "@/components/NicknameAssigner/NicknameAssigner.tsx";
 import Experimental from "@/components/Experimental.tsx";
 import Logs from "@/components/Logs.tsx";
+import {Menu as MenuIcon} from "@mui/icons-material";
 
 const MainMenu = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -18,14 +19,20 @@ const MainMenu = () => {
   const contentRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Drawer.Root size="xl" open={isOpen} onOpenChange={(e) => {
+    <Drawer.Root size="xl" open={isOpen} placement="start" onOpenChange={(e) => {
       setIsOpen(e.open)
       setMenuValue('Logs')
     }}>
       <Drawer.Trigger asChild>
-        <Button variant="outline" size="sm" paddingY="3">
-          {isOpen ? "Hide ▲" : "Show ▼"}
-        </Button>
+          <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+          >
+              <MenuIcon />
+          </IconButton>
       </Drawer.Trigger>
       <Portal>
         <Drawer.Backdrop/>

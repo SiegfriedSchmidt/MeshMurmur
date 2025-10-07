@@ -2,6 +2,7 @@ import {createHashRouter, createRoutesFromElements, Route, RouterProvider} from 
 import RootLayout from "./layouts/RootLayout.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import CallPage from "./pages/CallPage.tsx";
+import LandingPage from "./pages/LandingPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import {useState} from "react";
 import {UserData} from "@/types/user.ts";
@@ -13,6 +14,7 @@ const router = createHashRouter(createRoutesFromElements(
     <Route index element={<HomePage/>}/>
     <Route path="call" element={<CallPage/>}/>
     <Route path="*" element={<NotFoundPage/>}/>
+      <Route path="landing" element={<LandingPage/>}/>
   </Route>
 ))
 

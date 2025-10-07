@@ -5,11 +5,11 @@ import VersionText from "@/components/VersionText.tsx";
 
 const RootLayout = () => {
   return (
-    <>
-      <Header/>
-      <VersionText/>
+    <div style={{overflowX: 'hidden',}}>
+      {/*<Header/>*/}
+      {/*<VersionText/>*/}
       <Outlet/>
-    </>
+    </div>
   );
 };
 
