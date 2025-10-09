@@ -1,10 +1,10 @@
 import React, {FC, RefObject} from 'react';
 import {Center, Container, Separator, Text} from "@chakra-ui/react";
-import PeerConnectionTable from "@/components/PeerSettings/PeerConnectionTableMUI.tsx";
-import PeerBlackList from "@/components/PeerSettings/PeerBlackListMUI.tsx";
+import PeerConnectionTable from "@/components/Settings/PeerConnectionTableMUI.tsx";
+import PeerBlackList from "@/components/Settings/PeerBlackListMUI.tsx";
 import PeerOptions from "@/components/Settings/PeerOptionsMUI.tsx";
-import PeerInfo from "@/components/PeerSettings/PeerInfoMUI.tsx";
-import PeerActions from "@/components/PeerSettings/PeerActionsMUI.tsx";
+import PeerInfo from "@/components/Settings/PeerInfoMUI.tsx";
+import PeerActions from "@/components/Settings/PeerActionsMUI.tsx";
 
 interface Props {
   contentRef: RefObject<HTMLElement | null>;

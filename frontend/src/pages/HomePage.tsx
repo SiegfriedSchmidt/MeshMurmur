@@ -6,7 +6,7 @@ import SendOptions from "@/components/SendOptions/SendOptions.tsx";
 import FileProgressBar from "@/components/FileProgressBar.tsx";
 import TypingNotification from "@/components/TypingNotification.tsx";
 import useMainCallbacks from "@/hooks/useMainCallbacks.tsx";
-import AppBarSolid from './components/AppBarSolid.tsx';
+import AppBar from './components/AppBar.tsx';
 import { ThemeProvider, createTheme, useColorScheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -35,7 +35,7 @@ const HomePageContent = () => {
 
   return (
       <>
-          <AppBarSolid/>
+          <AppBar appBarPosition="sticky"/>
     <Container width="100%">
       <MessagesBlock messages={messages} setReplyMessage={setReplyMessage}/>
       <SendOptions addMessage={addMessage} replyMessage={replyMessage} resetReplyMessage={() => setReplyMessage(null)}/>

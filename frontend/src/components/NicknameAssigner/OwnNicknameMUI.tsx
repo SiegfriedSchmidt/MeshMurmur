@@ -3,11 +3,10 @@ import {
     Box,
     Button,
     FormControl,
-    InputLabel,
     TextField,
     FormHelperText,
     Snackbar,
-    Alert
+    Alert, Divider
 } from "@mui/material";
 import { AppConfig } from "@/utils/p2p-library/conf.ts";
 import useUserData from "@/hooks/useUserData.tsx";
@@ -46,9 +45,12 @@ const OwnNickname = () => {
     }
 
     return (
-        <Box display="flex" alignItems="center" pl={2}>
-            <FormControl error={invalid} sx={{ flex: 1 }}>
+        <>
+        <Divider sx={{mt: 2}}>Nickname</Divider>
+        <Box display="flex" alignItems="center">
+            <FormControl error={invalid} sx={{ flex: "auto" }}>
                 <TextField
+                    label="Nickname"
                     id="nickname-input"
                     placeholder="Empty nickname"
                     size="small"
@@ -86,6 +88,7 @@ const OwnNickname = () => {
                 </Alert>
             </Snackbar>
         </Box>
+        </>
     );
 };
 

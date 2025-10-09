@@ -12,9 +12,11 @@ import Slide from '@mui/material/Slide';
 import { connector } from "@/init.ts";
 import { Toaster } from "@/components/ui/toaster.tsx";
 import MainMenuMUI from "@/components/MainMenuMUI.tsx";
+import PeerSettingsDialog from '@/components/Settings/PeerSettingsDialog.tsx';
 
 interface Props {
     window?: () => Window;
+    appBarPosition?: 'fixed' | 'static' | 'sticky'; // Добавляем пропс для позиции
 }
 
 function HideOnScroll(props: Props & { children: React.ReactElement }) {
@@ -49,7 +51,7 @@ export default function OverlayAppBar(props: Props) {
             <CssBaseline />
             <HideOnScroll {...props}>
                 <AppBar
-                    position="fixed"
+                    position={props.appBarPosition || 'fixed'}
                     sx={{
                         backgroundColor: 'rgba(0,0,0,0.85)',
                         backdropFilter: 'blur(10px)',
@@ -68,6 +70,8 @@ export default function OverlayAppBar(props: Props) {
                         >
                             MeshMurmur
                         </Typography>
+
+                        <PeerSettingsDialog/>
 
                         {/* Статус пиров */}
                         <Chip

@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-    Box,
     Button,
     Divider,
     Stack,
@@ -41,12 +40,12 @@ const Logs = () => {
                 <Button
                     variant={isDebugMode ? "contained" : "outlined"}
                     color={isDebugMode ? "success" : "primary"}
-                    sx={{ width: 120 }}
+                    sx={{ width: '100%' }}
                     onClick={onClickDebug}
                 >
                     {isDebugMode ? "Debug mode" : "Info mode"}
                 </Button>
-                <Button variant="outlined" onClick={onClickClear}>
+                <Button variant="outlined" sx={{ width: '100%' }} onClick={onClickClear}>
                     Clear logs
                 </Button>
             </Stack>

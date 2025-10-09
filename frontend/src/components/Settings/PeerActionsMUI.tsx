@@ -16,6 +16,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
 import { edKeyManager } from "@/init.ts";
+import Divider from "@mui/material/Divider";
 
 const PeerActions = () => {
     const [open, setOpen] = useState(false);
@@ -26,7 +27,8 @@ const PeerActions = () => {
 
     return (
         <>
-            <Button variant="outlined" size="small" onClick={() => setOpen(true)}>
+            <Divider sx={{mt: 2}}>Key leak</Divider>
+            <Button variant="outlined" fullWidth={true} onClick={() => setOpen(true)}>
                 Show keys
             </Button>
 

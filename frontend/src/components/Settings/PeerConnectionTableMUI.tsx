@@ -1,6 +1,6 @@
 import React, {FC, RefObject, useCallback, useEffect, useState} from 'react';
 import {
-    Button,
+    Button, Divider,
     Menu,
     MenuItem,
     Table,
@@ -119,8 +119,9 @@ const PeerConnectionTable: FC<Props> = ({contentRef}) => {
 
     return (
         <>
+            <Divider>Peers</Divider>
             {peers.length > 0 ? (
-                <Table size="small" sx={{mt: 2}}>
+                <Table size="small" sx={{mt: 2, width: '100%'}}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Nickname</TableCell>

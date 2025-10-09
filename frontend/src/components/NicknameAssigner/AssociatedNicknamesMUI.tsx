@@ -1,8 +1,6 @@
 import React, { ChangeEvent, FC, RefObject, useState } from 'react';
 import {
-    Box,
     Button,
-    Container,
     IconButton,
     MenuItem,
     Select,
@@ -12,7 +10,7 @@ import {
     TableHead,
     TableRow,
     TextField,
-    Typography,
+    Divider,
     FormControl,
     Snackbar,
     Alert,
@@ -83,12 +81,10 @@ const AssociatedNicknames: FC<Props> = ({ contentRef }) => {
     }
 
     return (
-        <Container sx={{ p: 0, m: 0 }}>
-            <Box display="flex" justifyContent="center" mt={1}>
-                <Typography variant="h6">Associated nicknames</Typography>
-            </Box>
-
-            <Table size="small" sx={{ mt: 1 }}>
+        <>
+        <Divider sx={{mt: 2}}>Associated Nicknames</Divider>
+        <>
+            <Table size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell>Peer Id</TableCell>
@@ -169,7 +165,8 @@ const AssociatedNicknames: FC<Props> = ({ contentRef }) => {
                     {snackbar.message}
                 </Alert>
             </Snackbar>
-        </Container>
+        </>
+        </>
     );
 };
 
