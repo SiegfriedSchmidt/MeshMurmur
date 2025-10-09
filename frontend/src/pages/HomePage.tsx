@@ -7,10 +7,31 @@ import FileProgressBar from "@/components/FileProgressBar.tsx";
 import TypingNotification from "@/components/TypingNotification.tsx";
 import useMainCallbacks from "@/hooks/useMainCallbacks.tsx";
 import AppBarSolid from './components/AppBarSolid.tsx';
+import { ThemeProvider, createTheme, useColorScheme } from '@mui/material/styles';
 
-const HomePage = () => {
+const theme = createTheme({
+    colorSchemes: {
+        light: {
+            palette: {
+                mode: 'light',
+            },
+        },
+        dark: {
+            palette: {
+                mode: 'dark',
+            },
+        },
+    },
+});
+
+const HomePageContent = () => {
   const [replyMessage, setReplyMessage] = useState<completeMessageType | null>(null)
   const {messages, addMessage} = useMainCallbacks()
+    const { mode } = useColorScheme();
+
+    if (!mode) {
+        return null;
+    }
 
   return (
       <>
@@ -25,4 +46,10 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default function ToggleColorMode() {
+    return (
+        <ThemeProvider theme={theme}>
+            <HomePageContent />
+        </ThemeProvider>
+    );
+}

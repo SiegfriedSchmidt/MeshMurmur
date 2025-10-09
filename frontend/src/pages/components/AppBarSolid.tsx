@@ -11,7 +11,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 import { connector } from "@/init.ts";
 import { Toaster } from "@/components/ui/toaster.tsx";
-import MainMenu from "@/components/MainMenu.tsx";
+import MainMenuMUI from "@/components/MainMenuMUI.tsx";
 
 interface Props {
     window?: () => Window;
@@ -51,12 +51,12 @@ export default function OverlayAppBar(props: Props) {
                 <AppBar
                     position="sticky"
                     sx={{
-                        backgroundColor: 'rgb(0,0,0)',
+                        backgroundColor: 'rgba(0,0,0,0.85)',
                         backdropFilter: 'blur(10px)',
                     }}
                 >
                     <Toolbar>
-                        <MainMenu/>
+                        <MainMenuMUI/>
 
                         <Typography
                             variant="h4"

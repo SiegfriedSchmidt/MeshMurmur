@@ -2,7 +2,7 @@ import React, {FC, RefObject} from 'react';
 import {Center, Container, Separator, Text} from "@chakra-ui/react";
 import PeerConnectionTable from "@/components/PeerSettings/PeerConnectionTableMUI.tsx";
 import PeerBlackList from "@/components/PeerSettings/PeerBlackListMUI.tsx";
-import PeerOptions from "@/components/PeerSettings/PeerOptionsMUI.tsx";
+import PeerOptions from "@/components/Settings/PeerOptionsMUI.tsx";
 import PeerInfo from "@/components/PeerSettings/PeerInfoMUI.tsx";
 import PeerActions from "@/components/PeerSettings/PeerActionsMUI.tsx";
 

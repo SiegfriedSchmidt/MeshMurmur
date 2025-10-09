@@ -1,7 +1,7 @@
 import React, { FC, RefObject } from 'react';
 import {
     Box,
-    Checkbox,
+    Switch,
     FormControl,
     FormControlLabel,
     InputLabel,
@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import useUserData from "@/hooks/useUserData.tsx";
 import { signalerNameType } from "@/utils/p2p-library/types.ts";
+import {useColorScheme} from "@mui/material/styles";
 
 interface Props {
     contentRef: RefObject<HTMLElement | null>;
@@ -31,11 +32,16 @@ const PeerOptions: FC<Props> = ({ contentRef }) => {
         });
     }
 
+    const { mode, setMode } = useColorScheme();
+    if (!mode) {
+        return null;
+    }
+
     return (
         <Box mt={2} display="flex" flexDirection="column" gap={2}>
             <FormControlLabel
                 control={
-                    <Checkbox
+                    <Switch
                         checked={userData.connectorConfig.autoconnect}
                         onChange={(e) =>
                             setUserData({
@@ -53,7 +59,7 @@ const PeerOptions: FC<Props> = ({ contentRef }) => {
 
             <FormControlLabel
                 control={
-                    <Checkbox
+                    <Switch
                         checked={userData.connectorConfig.autoreconnect}
                         onChange={(e) =>
                             setUserData({
@@ -69,9 +75,11 @@ const PeerOptions: FC<Props> = ({ contentRef }) => {
                 label="Autoreconnect"
             />
 
-            <FormControl size="small" sx={{ width: 320 }}>
+            <FormControl size="small" sx={{ width: '100%' }}>
+                <InputLabel id="signaler-select-label">Signaler</InputLabel>
                 <Select
                     labelId="signaler-select-label"
+                    label="Signaler"
                     value={userData.connectorConfig.signaler}
                     onChange={(e) => onValue(e.target.value as signalerNameType)}
                     MenuProps={{
@@ -83,6 +91,21 @@ const PeerOptions: FC<Props> = ({ contentRef }) => {
                             {signaler}
                         </MenuItem>
                     ))}
+                </Select>
+            </FormControl>
+            <FormControl size="small" sx={{ width: '100%' }}>
+                <InputLabel id="app-theme-label">Theme</InputLabel>
+                <Select
+                    labelId="app-theme-label"
+                    label="Theme"
+                    value={mode}
+                    onChange={(event) =>
+                        setMode(event.target.value as 'system' | 'light' | 'dark')
+                    }
+                >
+                    <MenuItem value="system">System</MenuItem>
+                    <MenuItem value="light">Light</MenuItem>
+                    <MenuItem value="dark">Dark</MenuItem>
                 </Select>
             </FormControl>
         </Box>
