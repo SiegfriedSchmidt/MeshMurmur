@@ -4,6 +4,7 @@ import {
     Box,
     Button,
     Checkbox,
+    Container,
     Divider,
     FormControl,
     FormControlLabel,
@@ -35,8 +36,7 @@ const Experimental = () => {
     }
 
     return (
-        <>
-            <Divider>Experimental</Divider>
+        <Container sx={{ mt: 2 }}>
             <Alert severity="warning" sx={{ mb: 2 }}>
                 This section is experimental, please be careful... I warn you...
             </Alert>
@@ -48,7 +48,6 @@ const Experimental = () => {
 
             <FormControl fullWidth required sx={{ mt: 2 }}>
                 <TextField
-                    size={"small"}
                     label="Callee token"
                     required
                     value={calleeToken}
@@ -79,7 +78,7 @@ const Experimental = () => {
             <Box sx={{ mt: 2 }}>
                 <RTCConfigurationChanger />
             </Box>
-        </>
+        </Container>
     );
 };
 

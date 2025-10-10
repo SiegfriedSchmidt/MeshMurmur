@@ -147,7 +147,7 @@ const AssociatedNicknames: FC<Props> = ({ contentRef }) => {
                 </TableBody>
             </Table>
 
-            <Button sx={{ mt: 2 }} onClick={onClick}>
+            <Button sx={{ mt: 2 }} variant="outlined" onClick={onClick}>
                 Submit
             </Button>
 

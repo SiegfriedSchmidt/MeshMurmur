@@ -4,7 +4,7 @@ import { AppVersion, peerId } from "@/init.ts";
 
 const PeerInfo = () => {
     return (
-        <Paper sx={{ maxWidth: 200, p: 1 }}>
+        <Paper>
             <List dense>
                 <ListItem>
                     <ListItemText primary="App version" secondary={AppVersion} />

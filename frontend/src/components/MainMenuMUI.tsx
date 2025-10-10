@@ -42,7 +42,7 @@ export default function TemporaryDrawer() {
             <List>
                 {['Chat', 'Calls'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton href={index === 0 ? '/#/' : '/#/call'}>
                             <ListItemIcon>
                                 {index === 0 ? <ChatBubbleRoundedIcon/> : <CallIcon/>}
                             </ListItemIcon>
@@ -53,7 +53,6 @@ export default function TemporaryDrawer() {
             </List>
             <Divider />
 
-            {/* Одна кнопка Settings между divider-ами */}
             <List>
                 <ListItem disablePadding>
                     <ListItemButton onClick={handleSettingsClick}>
@@ -69,7 +68,7 @@ export default function TemporaryDrawer() {
             <List>
                 {['FAQ', 'Feedback'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton href={index === 0 ? '/#/FAQ' : '/#/Feedback'}>
                             <ListItemIcon>
                                 {index === 0 ? <QuizIcon /> : <ErrorIcon /> }
                             </ListItemIcon>
