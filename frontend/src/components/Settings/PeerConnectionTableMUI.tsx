@@ -165,6 +165,7 @@ const PeerConnectionTable: FC<Props> = ({contentRef}) => {
                         return (
                             <>
                                 <MenuItem onClick={() => onSelect(peer.id, "disconnect")}>Disconnect...</MenuItem>
+                                <MenuItem onClick={() => onSelect(peer.id, "call")}>Call</MenuItem>
                                 <MenuItem onClick={() => onSelect(peer.id, "ping")}>Ping</MenuItem>
                             </>
                         );
