@@ -95,7 +95,7 @@ export default function ResponsiveDialog() {
                             </Tabs>
                         </Box>
                         <CustomTabPanel value={value} index={0}>
-                            <PeerConnectionTable/>
+                            <PeerConnectionTable contentRef={contentRef}/>
                             <PeerBlackList/>
                             <NicknameAssigner contentRef={contentRef}/>
                             <PeerActions/>
@@ -108,6 +108,7 @@ export default function ResponsiveDialog() {
                             <Box
                                 sx={{
                                     height: '60vh',
+                                    minWidth: '500px',
                                     border: '2px solid',
                                     borderColor: 'divider',
                                     borderRadius: 2,
