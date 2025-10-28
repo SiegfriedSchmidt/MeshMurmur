@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Chip } from "@mui/material";
-import { logType } from "../utils/p2p-library/types.ts";
+import { logType } from "@p2p-library/types.ts";
 
 const LogLabel: FC<{ type: logType["type"] }> = ({ type }) => {
     if (type === "success") {

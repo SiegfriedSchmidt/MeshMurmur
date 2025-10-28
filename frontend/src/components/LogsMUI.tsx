@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import LogLabel from "@/components/LogLabelMUI.tsx";
 import { connector, logger } from "@/init.ts";
-import { logType } from "@/utils/p2p-library/types.ts";
+import { logType } from "@p2p-library/types.ts";
 
 const Logs = () => {
     const [isDebugMode, setDebugMode] = useState<boolean>(false);

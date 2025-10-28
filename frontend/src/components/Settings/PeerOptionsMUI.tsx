@@ -9,7 +9,7 @@ import {
     Select
 } from "@mui/material";
 import useUserData from "@/hooks/useUserData.tsx";
-import { signalerNameType } from "@/utils/p2p-library/types.ts";
+import { signalerNameType } from "@p2p-library/types.ts";
 import {useColorScheme} from "@mui/material/styles";
 
 interface Props {

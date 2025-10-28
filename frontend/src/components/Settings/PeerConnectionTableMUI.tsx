@@ -11,7 +11,7 @@ import {
     Typography
 } from "@mui/material";
 import {connector, logger} from "@/init.ts";
-import {connectionStageType} from "@/utils/p2p-library/types.ts";
+import {connectionStageType} from "@p2p-library/types.ts";
 
 interface Props {
     contentRef: RefObject<HTMLElement | null>;

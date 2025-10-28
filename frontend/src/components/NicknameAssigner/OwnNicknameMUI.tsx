@@ -8,7 +8,7 @@ import {
     Snackbar,
     Alert, Divider
 } from "@mui/material";
-import { AppConfig } from "@/utils/p2p-library/conf.ts";
+import { AppConfig } from "@p2p-library/conf.ts";
 import useUserData from "@/hooks/useUserData.tsx";
 
 const OwnNickname = () => {

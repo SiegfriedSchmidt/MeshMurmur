@@ -18,7 +18,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import useUserData from "@/hooks/useUserData.tsx";
 import { connector } from "@/init.ts";
-import { AppConfig } from "@/utils/p2p-library/conf.ts";
+import { AppConfig } from "@p2p-library/conf.ts";
 import TooltipPeerId from "@/components/TooltipPeerId.tsx";
 
 interface Props {
