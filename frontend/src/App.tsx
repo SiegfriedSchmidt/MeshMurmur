@@ -13,7 +13,7 @@ const router = createHashRouter(createRoutesFromElements(
   <Route element={<RootLayout/>}>
     <Route index element={<HomePage/>}/>
     <Route path="call" element={<CallPage/>}/>
-      <Route path="callinterface" element={<CallInterface/>}/>
+    <Route path="callinterface" element={<CallInterface/>}/>
     <Route path="*" element={<NotFoundPage/>}/>
   </Route>
 ))

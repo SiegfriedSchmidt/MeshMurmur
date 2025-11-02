@@ -10,6 +10,8 @@ export type connectionStageType =
   | "reconnecting"
   | "disconnected"
 
+export type conversationModeType = "Chat" | "VoiceCall" | "VideoCall"
+
 export type logType = { text: string, type: "success" | "info" | "warn" | "error" | "debug" }
 
 export type signalerNameType = keyof typeof signalers

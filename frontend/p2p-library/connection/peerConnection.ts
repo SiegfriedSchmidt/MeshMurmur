@@ -1,4 +1,4 @@
-import {connectionStageType} from "@p2p-library/types.ts";
+import {connectionStageType, conversationModeType} from "@p2p-library/types.ts";
 import {Logger} from "@p2p-library/logger.ts";
 import {ICEInfo, parseRTCStats} from "@p2p-library/parseRTCStart.ts";
 import {WebRTCPeerConnection} from "@p2p-library/connection/webRTCPeerConnection.ts";
@@ -28,13 +28,16 @@ export class PeerConnection {
   constructor(
     public readonly peerId: string,
     public readonly targetPeerId: string,
+    mode: conversationModeType,
     private readonly logger: Logger,
     private readonly signaler: Signaler,
     private readonly rtcConfigHelper: RTCConfigHelper,
     private onPeerConnectionChanged: (status: connectionStageType, block?: boolean, error?: boolean) => void,
+    private onStream?: (stream: MediaStream) => void
   ) {
     this.negotiationManager = new NegotiationManager(
       isPolite(peerId, targetPeerId),
+      mode,
       logger.createChild("Negotiation"),
       (np) => signaler.sendNegotiationPackage(targetPeerId, np)
     )
@@ -44,7 +47,7 @@ export class PeerConnection {
     return this.connectionStage === "connected"
   }
 
-  async connect(np?: NegotiationPackageType): Promise<ManagerMiddleware | undefined> {
+  async connect(np?: NegotiationPackageType, stream?: MediaStream): Promise<ManagerMiddleware | undefined> {
     this.connectTimeoutId = setTimeout(() => {
       if (!this.is_connected()) {
         this.disconnect(false, true)
@@ -107,7 +110,7 @@ export class PeerConnection {
       onerror: () => null,
       // onclose: ({channelType}) => this.logger.info(`${channelType} channel closed`),
       // onerror: ({error}) => this.logger.info(error)
-    }, onFinalState)
+    }, onFinalState, stream, stream => this.onStream?.(stream))
 
     return managerMiddleware
   }

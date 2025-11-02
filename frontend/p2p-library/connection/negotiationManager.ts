@@ -1,9 +1,11 @@
 import {Logger} from "@p2p-library/logger.ts";
 import {protocolVersion} from "@p2p-library/conf.ts";
+import {conversationModeType} from "@p2p-library/types.ts";
 
 interface NegotiationDescription {
   sessionId: string
   protocolVersion: string
+  mode: conversationModeType
 }
 
 export type NegotiationPackageType =
@@ -20,6 +22,7 @@ export class NegotiationManager {
 
   constructor(
     private readonly polite: boolean,
+    private readonly mode: conversationModeType,
     private readonly logger: Logger,
     private readonly sendNegotiationPackage: (np: NegotiationPackageType) => void,
   ) {
@@ -44,7 +47,7 @@ export class NegotiationManager {
   }
 
   createOffer() {
-    this.description = {sessionId: window.crypto.randomUUID(), protocolVersion}
+    this.description = {sessionId: window.crypto.randomUUID(), protocolVersion, mode: this.mode}
     return this.description
   }
 

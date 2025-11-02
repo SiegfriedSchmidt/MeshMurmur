@@ -26,9 +26,23 @@ export class WebRTCPeerConnection {
 
   connect(
     handlers: ChannelEventHandlers,
-    onFinalState: (state: RTCPeerConnectionState) => void
+    onFinalState: (state: RTCPeerConnectionState) => void,
+    stream?: MediaStream,
+    onStream?: (stream: MediaStream) => void
   ) {
     this.channel.registerEvents(handlers)
+
+    if (stream && onStream) {
+      for (const track of stream.getTracks()) {
+        this.pc.addTrack(track, stream);
+      }
+
+      this.pc.ontrack = ({track, streams}) => {
+        track.onunmute = () => {
+          onStream(streams[0])
+        };
+      };
+    }
 
     const polite = isPolite(this.peerId, this.targetPeerId)
 

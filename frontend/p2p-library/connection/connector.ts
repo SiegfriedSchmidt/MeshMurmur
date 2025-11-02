@@ -3,7 +3,7 @@ import {PeerConnection} from "@p2p-library/connection/peerConnection.ts";
 import {ActionManager} from "@p2p-library/connection/actionManager.ts";
 import {Signaler} from "@p2p-library/abstract.ts";
 import {createSignaler} from "@p2p-library/signalers/createSignaler.ts";
-import {connectionStageType, signalerNameType} from "@p2p-library/types.ts";
+import {connectionStageType, conversationModeType, signalerNameType} from "@p2p-library/types.ts";
 import {NegotiationManager, NegotiationPackageType} from "@p2p-library/connection/negotiationManager.ts";
 import {AppConfig} from "@p2p-library/conf.ts";
 import {TypedEventEmitter} from "@p2p-library/eventEmitter.ts";
@@ -22,6 +22,7 @@ export class Connector {
   public actions: ActionManager
   public eventEmitter = new TypedEventEmitter<{
     onPeerConnectionChanged: { targetPeerId: string, status: connectionStageType }
+    onCall: { np: NegotiationPackageType, targetPeerId: string }
   }>();
   public blackList: Set<string> = new Set()
   public potentialPeers: Set<string> = new Set()
@@ -90,7 +91,7 @@ export class Connector {
     this.signaler.setPeerData({ready: this.config.autoconnect});
   }
 
-  public async createConnection(targetPeerId: string, manual = false, np?: NegotiationPackageType) {
+  public async createConnection(targetPeerId: string, manual = false, np?: NegotiationPackageType, stream?: MediaStream, onStream?: (stream: MediaStream) => void) {
     if (targetPeerId === this.peerId) return
     this.potentialPeers.add(targetPeerId);
     if (targetPeerId in this.connections) return
@@ -106,7 +107,12 @@ export class Connector {
       return
     }
 
-    this.connections[targetPeerId] = new PeerConnection(this.peerId, targetPeerId, this.logger, this.signaler, this.rtcConfigHelper, this.createOnPeerConnectionChanged(targetPeerId));
+    if (!manual && np && np.t === 'offer' && np.description.mode === "VoiceCall") {
+      return this.eventEmitter.emit("onCall", {np, targetPeerId})
+    }
+
+    const mode: conversationModeType = stream ? "VoiceCall" : "Chat"
+    this.connections[targetPeerId] = new PeerConnection(this.peerId, targetPeerId, mode, this.logger, this.signaler, this.rtcConfigHelper, this.createOnPeerConnectionChanged(targetPeerId), onStream);
     this.connections[targetPeerId].negotiationManager.reconnect = (np) => {
       const nickname = this.actions.targetPeerNickname(targetPeerId)
       const pc = this.connections[targetPeerId]
@@ -123,7 +129,7 @@ export class Connector {
     }
 
     this.eventEmitter.emit('onPeerConnectionChanged', {targetPeerId, status: 'negotiating'})
-    const managerMiddleware = await this.connections[targetPeerId].connect(np)
+    const managerMiddleware = await this.connections[targetPeerId].connect(np, stream)
 
     if (managerMiddleware) {
       this.actions.registerCallbacksAndData(managerMiddleware, targetPeerId)
@@ -135,7 +141,7 @@ export class Connector {
   private isPeerAllowedToConnect(targetPeerId: string, manual: boolean, incoming: boolean): boolean {
     if (manual) return true
     return !this.blackList.has(targetPeerId) &&
-      this.config.autoconnect &&
+      (incoming || this.config.autoconnect && !incoming) &&
       this.peers.length < AppConfig.maxNumberOfPeers &&
       (incoming || this.peers.length < AppConfig.maxNumberOfOutgoingConnections)
   }
